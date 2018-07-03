@@ -25,9 +25,7 @@ def make_predict():
             return jsonify("error text here")
 
         #return a single prediction and convert to json
-        cost_pred=model.predict(user_data).tolist()
-        return json.dumps({'cost':cost_pred});
-        #return jsonify({'cost':cost_pred});
+        return jsonify(model.predict(user_data).tolist())
     
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
