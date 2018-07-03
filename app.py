@@ -14,7 +14,7 @@ def make_predict():
         try:
             #expecting user imput as a json file with a title 'volume'
             data = request.get_json()
-            user_data=float(data["volume"])
+            user_data=data["volume"]
             my_model = joblib.load("./LM_33%_split_model.pkl")
         except ValueError:
             return jsonify("errors text here")
@@ -32,6 +32,7 @@ def make_predict():
    ### output=[y[0]]
 
     ###return jsonify(results=output)
+
 
 
 if __name__ == '__main__':
