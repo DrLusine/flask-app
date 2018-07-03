@@ -1,5 +1,5 @@
 from flask import Flask,abort,jsonify,request
-## import numpy as np
+import numpy as np
 from sklearn.externals import joblib
 
 #creating web service running on port 8000, answer POST requests
