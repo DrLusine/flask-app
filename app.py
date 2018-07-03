@@ -1,12 +1,15 @@
 from flask import Flask,abort,jsonify,request
 import numpy as np
 from sklearn.externals import joblib
+from flask_cors import CORS
 
 
 my_model = joblib.load("./LM_33%_split_model_python3.pkl")
 
 #creating web service running on port 8000, answer POST requests
 app = Flask(__name__)
+cors = CORS(app, resources={r"/*": {"origins": "https://testing-cost-predictor.firebaseapp.com"}})
+
 @app.route("/api", methods=['POST'])
 
 #prediction function
