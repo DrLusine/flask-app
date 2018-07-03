@@ -19,7 +19,7 @@ def make_predict():
         try:
             #expecting user imput as a json file with a title 'volume'
             data = request.get_json()
-            user_data = request.args.get('volume')
+            user_data=data["volume"]
                            
         except ValueError:
             return jsonify("error text here")
