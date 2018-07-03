@@ -14,12 +14,12 @@ def make_predict():
 
     if request.method =='POST':
         try:
-            print("PASSED 1" + request)
+            
             #expecting user imput as a json file with a title 'volume'
             data = request.get_json()
-            print("PASSED 2" + data)
+            
             user_data=data["volume"]
-            print("PASSED 3" + user_data)
+            
             
         except ValueError:
             return jsonify("error text here")
