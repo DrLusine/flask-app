@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.externals import joblib
 
 
-my_model = joblib.load("./LM_33%_split_model.pkl")
+my_model = joblib.load("./LM_33%_split_model_python3.pkl")
 
 #creating web service running on port 8000, answer POST requests
 app = Flask(__name__)
