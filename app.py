@@ -10,12 +10,12 @@ model = joblib.load("./LM_33%_split_model_python3.pkl")
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "https://testing-cost-predictor.firebaseapp.com"}})
 
-@app.route("/fitOutCostPrediction", methods=['GET'])
+@app.route("/fitOutCostPrediction", methods=['POST'])
 
 #prediction function
 def make_predict():
 
-    if request.method =='GET':
+    if request.method =='POST':
         try:
             #expecting user imput as a json file with a title 'volume'
             data = request.get_json()
