@@ -8,7 +8,8 @@ model = joblib.load("./LM_33%_split_model_python3.pkl")
 
 #creating web service running on port 8000, answer POST requests
 app = Flask(__name__)
-cors = CORS(app, resources={r"/*": {"origins":"https://frontend-cost-predictor-ac557.firebaseapp.com/#/"}})
+cors = CORS(app, resources={r"/*": {"origins":["https://testing-cost-predictor.firebaseapp.com",
+                                                "https://frontend-cost-predictor-ac557.firebaseapp.com/#/"]})
 
 @app.route("/fitOutCostPrediction", methods=['POST'])
 
