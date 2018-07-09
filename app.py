@@ -24,10 +24,10 @@ def make_predict():
             #expecting user imput as a json file with a title 'volume'
              data=request.form      
                  volume = data['volume']
-                 cat_a = data['cat_a']
-                 cat_b = data['cat_b']
-                 cat_a_b = data['cat_a_b'] 
-             user_data={'volume':volume, 'cat_a':cat_a, 'cat_b':cat_b,'cat_a_b':cat_a_b} 
+                 catA = data['cat_a']
+                 catB = data['cat_b']
+                 catAandB = data['cat_a_b'] 
+             user_data={'volume':volume, 'cat_a':catA, 'cat_b':catB,'cat_a_b':catAandB} 
              a = input(user_data)
              cost_pred = model.predict([a])[0] 
        
