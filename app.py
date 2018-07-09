@@ -10,7 +10,7 @@ model = joblib.load("./LM_33%_split_model_python3.pkl")
 app = Flask(__name__)
 cors = CORS(app, resources={
   r"/*": {
-    "origins":["https://testing-cost-predictor.firebaseapp.com", "https://frontend-cost-predictor-ac557.firebaseapp.com/#/"]
+    "origins":["https://testing-cost-predictor.firebaseapp.com", "https://frontend-cost-predictor-ac557.firebaseapp.com"]
   }
 })
 
