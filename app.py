@@ -22,14 +22,20 @@ def make_predict():
     if request.method =='POST':
         try:
             #expecting user imput as a json file with a title 'volume'
-            data = request.get_json()
-            user_data=data["volume"]
-                           
-        except ValueError:
+             data=request.form      
+                 volume = data['volume']
+                 cat_a = data['cat_a']
+                 cat_b = data['cat_b']
+                 cat_a_b = data['cat_a_b'] 
+             user_data={'volume':volume, 'cat_a':cat_a, 'cat_b':cat_b,'cat_a_b':cat_a_b} 
+             a = input(user_data)
+             cost_pred = model.predict([a])[0] 
+       
+      except ValueError:
             return jsonify("error text here")
-
-        #return a single prediction and convert to json
-        return jsonify(model.predict(user_data).tolist())
+        
+        # return a json value
+        return json.dumps({'cost':cost_pred});
     
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
