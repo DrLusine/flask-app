@@ -21,12 +21,15 @@ def make_predict():
 
     if request.method =='POST':
         try:
+            print('Loading from JSON')
             costPredictionParameters = request.get_json()
+            print('Loading volume')
             buildingVolume = costPredictionParameters['buildingVolume']
             isCatAIncluded = 0
             isCatBIncluded = 0
             isCatAAndBIncluded = 0
 
+            print('Checking CATAB')
             if costPredictionParameters['isCatAIncluded'] == True and costPredictionParameters['isCatBIncluded'] == True:
                 isCatAAndBIncluded = 1
             elif costPredictionParameters['isCatAIncluded'] == True and costPredictionParameters['isCatBIncluded'] == False:
@@ -35,6 +38,8 @@ def make_predict():
                 isCatBIncluded = 1
             
             costPredictionParametersForModel = [buildingVolume, isCatAIncluded, isCatBIncluded, isCatAAndBIncluded]
+            print('Ready to predict model')
+            print(costPredictionParametersForModel)
             
             cost = model.predict(costPredictionParametersForModel)
        
