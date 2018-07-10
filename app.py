@@ -37,11 +37,13 @@ def make_predict():
             elif costPredictionParameters['isCatAIncluded'] == False and costPredictionParameters['isCatBIncluded'] == True:
                 isCatBIncluded = 1
             
+            print('Creating parameters arrays')
             costPredictionParametersForModel = [buildingVolume, isCatAIncluded, isCatBIncluded, isCatAAndBIncluded]
             print('Ready to predict model')
             print(costPredictionParametersForModel)
             
             cost = model.predict(costPredictionParametersForModel)
+            print(cost)
        
         except ValueError:
             return jsonify("error text here")
