@@ -27,28 +27,22 @@ def make_predict():
             isCatBIncluded = 0
             isCatAAndBIncluded = 0
 
-            if costPredictionParameters['isCatAIncluded'] == True:
-                isCatAIncluded = 1
-            if costPredictionParameters['isCatBIncluded'] == True:
-                isCatBIncluded = 1
             if costPredictionParameters['isCatAIncluded'] == True and costPredictionParameters['isCatBIncluded'] == True:
                 isCatAAndBIncluded = 1
+            elif costPredictionParameters['isCatAIncluded'] == True and costPredictionParameters['isCatBIncluded'] == False:
+                isCatAIncluded = 1
+            elif costPredictionParameters['isCatAIncluded'] == False and costPredictionParameters['isCatBIncluded'] == True:
+                isCatBIncluded = 1
             
-            costPredictionParametersForModel = {
-                'volume':buildingVolume, 
-                'cat_type_A':isCatAIncluded, 
-                'cat_type_B':isCatBIncluded, 
-                'cat_type_AB':isCatAAndBIncluded
-            } 
-
-            a = input(costPredictionParametersForModel)
-            cost_pred = model.predict([a])[0] 
+            costPredictionParametersForModel = [buildingVolume, isCatAIncluded, isCatBIncluded, isCatAAndBIncluded]
+            
+            cost = model.predict(costPredictionParametersForModel)
        
         except ValueError:
             return jsonify("error text here")
         
         # return a json value
-        return json.dumps({'cost':cost_pred})
+        return json.dumps({'cost':cost})
     
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
