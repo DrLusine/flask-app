@@ -7,7 +7,7 @@ from flask_cors import CORS
 model = joblib.load("./LR_33%split_model_inc_CatAB.pkl")
 
 #creating web service running on port 8000, answer POST requests
-app = Flask(__name__)
+app = Flask(__name__)   
 cors = CORS(app, resources={
   r"/*": {
     "origins": ["https://testing-cost-predictor.firebaseapp.com", "https://frontend-cost-predictor-ac557.firebaseapp.com"]
@@ -27,11 +27,11 @@ def make_predict():
             isCatBIncluded = 0
             isCatAAndBIncluded = 0
 
-            if costPredictionParameters['isCatAIncluded'] == true:
+            if costPredictionParameters['isCatAIncluded'] == True:
                 isCatAIncluded = 1
-            if costPredictionParameters['isCatBIncluded'] == true:
+            if costPredictionParameters['isCatBIncluded'] == True:
                 isCatBIncluded = 1
-            if costPredictionParameters['isCatAIncluded'] == true and costPredictionParameters['isCatBIncluded'] == true:
+            if costPredictionParameters['isCatAIncluded'] == True and costPredictionParameters['isCatBIncluded'] == True:
                 isCatAAndBIncluded = 1
             
             costPredictionParametersForModel = {
