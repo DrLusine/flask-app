@@ -22,12 +22,12 @@ def make_predict():
     if request.method =='POST':
         try:
             #expecting user imput as a json file with a title 'volume'
-             data=request.form      
+            data = request.get_json()
                  volume = data['volume']
-                 catA = data['cat_a']
-                 catB = data['cat_b']
-                 catAandB = data['cat_a_b'] 
-             user_data={'volume':volume, 'cat_a':catA, 'cat_b':catB,'cat_a_b':catAandB} 
+                 catA = data['cat_type_A']
+                 catB = data['cat_type_B']
+                 catAandB = data['cat_type_AB'] 
+             user_data={'volume':volume, 'cat_type_A':catA, 'cat_type_B':catB,'cat_type_AB':catAandB} 
              a = input(user_data)
              cost_pred = model.predict([a])[0] 
        
