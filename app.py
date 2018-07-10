@@ -42,7 +42,7 @@ def make_predict():
             print('Ready to predict model')
             print(costPredictionParametersForModel)
             
-            cost = model.predict(costPredictionParametersForModel)
+            cost = model.predict(costPredictionParametersForModel)[0]
             print(cost)
        
         except ValueError:
