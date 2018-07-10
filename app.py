@@ -4,7 +4,7 @@ from sklearn.externals import joblib
 from flask_cors import CORS
 
 
-model = joblib.load("./LM_33%_split_model_python3.pkl")
+model = joblib.load("./LR_33%split_model_inc_CatAB.pkl")
 
 #creating web service running on port 8000, answer POST requests
 app = Flask(__name__)
