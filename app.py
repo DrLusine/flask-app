@@ -23,13 +23,13 @@ def make_predict():
         try:
             #expecting user imput as a json file with a title 'volume'
             data = request.get_json()
-                 volume = data['volume']
-                 catA = data['cat_type_A']
-                 catB = data['cat_type_B']
-                 catAandB = data['cat_type_AB'] 
-             user_data={'volume':volume, 'cat_type_A':catA, 'cat_type_B':catB,'cat_type_AB':catAandB} 
-             a = input(user_data)
-             cost_pred = model.predict([a])[0] 
+            volume = data['volume']
+            catA = data['cat_type_A']
+            catB = data['cat_type_B']
+            catAandB = data['cat_type_AB'] 
+            user_data={'volume':volume, 'cat_type_A':catA, 'cat_type_B':catB,'cat_type_AB':catAandB} 
+            a = input(user_data)
+            cost_pred = model.predict([a])[0] 
        
       except ValueError:
             return jsonify("error text here")
