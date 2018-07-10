@@ -21,21 +21,34 @@ def make_predict():
 
     if request.method =='POST':
         try:
-            #expecting user imput as a json file with a title 'volume'
-            data = request.get_json()
-            volume = data['volume']
-            catA = data['cat_type_A']
-            catB = data['cat_type_B']
-            catAandB = data['cat_type_AB'] 
-            user_data={'volume':volume, 'cat_type_A':catA, 'cat_type_B':catB,'cat_type_AB':catAandB} 
-            a = input(user_data)
+            costPredictionParameters = request.get_json()
+            buildingVolume = costPredictionParameters['buildingVolume']
+            isCatAIncluded = 0
+            isCatBIncluded = 0
+            isCatAAndBIncluded = 0
+
+            if costPredictionParameters['isCatAIncluded'] == true:
+                isCatAIncluded = 1
+            if costPredictionParameters['isCatBIncluded'] == true:
+                isCatBIncluded = 1
+            if costPredictionParameters['isCatAIncluded'] == true and costPredictionParameters['isCatBIncluded'] == true:
+                isCatAAndBIncluded = 1
+            
+            costPredictionParametersForModel = {
+                'volume':buildingVolume, 
+                'cat_type_A':isCatAIncluded, 
+                'cat_type_B':isCatBIncluded, 
+                'cat_type_AB':isCatAAndBIncluded
+            } 
+
+            a = input(costPredictionParametersForModel)
             cost_pred = model.predict([a])[0] 
        
-      except ValueError:
+        except ValueError:
             return jsonify("error text here")
         
         # return a json value
-        return json.dumps({'cost':cost_pred});
+        return json.dumps({'cost':cost_pred})
     
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
