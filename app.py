@@ -1,4 +1,4 @@
-from flask import Flask,abort,jsonify,request
+from flask import Flask,abort,jsonify,request,json
 import numpy as np
 from sklearn.externals import joblib
 from flask_cors import CORS
