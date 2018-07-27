@@ -4,7 +4,8 @@ from flask import jsonify, Blueprint, json, request, json
 from flask_restful import Resource, Api
 from sklearn.externals import joblib
 
-model = joblib.load("./deep_learning_models/LR_33%split_model_inc_CatAB.pkl")
+costPredictionModel = joblib.load(
+    "./deep_learning_models/LR_33%split_model_inc_CatAB.pkl")
 
 
 class FitOutCostPrediction(Resource):
@@ -26,7 +27,8 @@ class FitOutCostPrediction(Resource):
             costPredictionParametersForModel = [
                 buildingVolume, isCatAIncluded, isCatBIncluded, isCatAAndBIncluded]
 
-            cost = model.predict([costPredictionParametersForModel])[0]
+            cost = costPredictionModel.predict(
+                [costPredictionParametersForModel])[0]
 
         except ValueError:
             return jsonify("error text here")
