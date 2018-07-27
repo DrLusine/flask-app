@@ -10,7 +10,7 @@ model = joblib.load("./LR_33%split_model_inc_CatAB.pkl")
 app = Flask(__name__)   
 cors = CORS(app, resources={
   r"/*": {
-    "origins": ["https://testing-cost-predictor.firebaseapp.com", "https://frontend-cost-predictor-ac557.firebaseapp.com"]
+    "origins": ["https://testing-cost-predictor.firebaseapp.com","http://localhost:9000", "https://frontend-cost-predictor-ac557.firebaseapp.com"]
   }
 })
 
@@ -21,15 +21,12 @@ def make_predict():
 
     if request.method =='POST':
         try:
-            print('Loading from JSON')
             costPredictionParameters = request.get_json()
-            print('Loading volume')
             buildingVolume = costPredictionParameters['buildingVolume']
             isCatAIncluded = 0
             isCatBIncluded = 0
             isCatAAndBIncluded = 0
 
-            print('Checking CATAB')
             if costPredictionParameters['isCatAIncluded'] == True and costPredictionParameters['isCatBIncluded'] == True:
                 isCatAAndBIncluded = 1
             elif costPredictionParameters['isCatAIncluded'] == True and costPredictionParameters['isCatBIncluded'] == False:
@@ -37,13 +34,9 @@ def make_predict():
             elif costPredictionParameters['isCatAIncluded'] == False and costPredictionParameters['isCatBIncluded'] == True:
                 isCatBIncluded = 1
             
-            print('Creating parameters arrays')
             costPredictionParametersForModel = [buildingVolume, isCatAIncluded, isCatBIncluded, isCatAAndBIncluded]
-            print('Ready to predict model')
-            print(costPredictionParametersForModel)
             
             cost = model.predict([costPredictionParametersForModel])[0]
-            print(cost)
        
         except ValueError:
             return jsonify("error text here")
