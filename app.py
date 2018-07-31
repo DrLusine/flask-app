@@ -1,6 +1,4 @@
-from flask import Flask, abort, jsonify, request, json
-import numpy as np
-from sklearn.externals import joblib
+from flask import Flask
 from flask_cors import CORS
 from resources.fit_out_cost_prediction import fitout_cost_prediction_api
 

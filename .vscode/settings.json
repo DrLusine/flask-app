@@ -1,10 +1,20 @@
 {    
-    "python.pythonPath": "C:\\Users\\giant\\AppData\\Local\\Programs\\Python\\Python37-32\\python",
-    "python.linting.enabled": true,
-    "git.enableSmartCommit": true,
     "git.autofetch": true,
+    "git.enableSmartCommit": true,
     "gitlens.advanced.messages": {
         "suppressShowKeyBindingsNotice": true
     },
-    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "gitlens.historyExplorer.enabled": true,
+    "files.exclude": {
+        "**/.git": false
+    },
+
+    "python.linting.enabled": true,
+    "python.pythonPath": "C:\\Users\\User\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
+    "python.unitTest.pyTestEnabled": true,
+    "python.unitTest.pyTestArgs": [
+        ".\\resources"
+    ],
+    "python.unitTest.unittestEnabled": false,
+    "python.unitTest.nosetestsEnabled": false,
   }

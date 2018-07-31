@@ -1,5 +1,5 @@
 
-from flask import jsonify, Blueprint, json, request, json
+from flask import jsonify, Blueprint, request
 
 from flask_restful import Resource, Api
 from sklearn.externals import joblib
@@ -30,11 +30,12 @@ class FitOutCostPrediction(Resource):
             cost = costPredictionModel.predict(
                 [costPredictionParametersForModel])[0]
 
-        except ValueError:
+        except ValueError as error:
+            print(error)
             return jsonify("error text here")
 
         # return a json value
-        return json.dumps({'cost': cost})
+        return jsonify({'cost': cost})
 
 
 fitout_cost_prediction_api = Blueprint(
