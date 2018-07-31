@@ -31,8 +31,13 @@ class FitOutCostPrediction(Resource):
                 [costPredictionParametersForModel])[0]
 
         except ValueError as error:
-            print(error)
-            return jsonify("error text here")
+            return jsonify({'error': 'some error message'})
+        
+        except TypeError as error:
+            return jsonify({'error': 'some error message'})
+
+        except KeyError as error:
+            return jsonify({'error': 'some error message'})
 
         # return a json value
         return jsonify({'cost': cost})
