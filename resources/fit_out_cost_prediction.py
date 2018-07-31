@@ -3,6 +3,7 @@ from flask import jsonify, Blueprint, request
 
 from flask_restful import Resource, Api
 from sklearn.externals import joblib
+from services.cost_prediction_failed import CostPredictionFailed
 
 costPredictionModel = joblib.load(
     "./deep_learning_models/LR_33%split_model_inc_CatAB.pkl")
@@ -34,7 +35,7 @@ class FitOutCostPrediction(Resource):
             return jsonify({'error': 'some error message'})
         
         except TypeError as error:
-            return jsonify({'error': 'some error message'})
+            raise CostPredictionFailed(error.args[0], response_status_code=500)
 
         except KeyError as error:
             return jsonify({'error': 'some error message'})

@@ -18,7 +18,7 @@ def test_stuff(app_instance):
         app_instance.register_blueprint(fitout_cost_prediction_api)
         client = app_instance.test_client()
         response = client.post('/fitOutCostPrediction', json={
-        'buildingVolume': -1000000000000000000000000000000000, 'isCatAIncluded': 'False', 'isCatBIncluded': 'False'
+        'buildingVolume': 'somerubbish', 'isCatAIncluded': 'False', 'isCatBIncluded': 'False'
     })
         assert response.status_code == 200
         response_data = response.get_json()
