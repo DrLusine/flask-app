@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Cost_prediction_api",
+            "type": "pythonExperimental",
+            "request": "launch",
+            "module": "flask",
+            "env": {
+                "FLASK_APP": "app.py"
+            },
+            "args": [
+                "run",
+                "--no-debugger",
+                "--host=0.0.0.0",
+                "--port=8080",
+            ],
+            "jinja": true
+        },
+    ]
+}

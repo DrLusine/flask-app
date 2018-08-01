@@ -1,3 +1,20 @@
-{
-    "python.pythonPath": "C:\\Users\\User\\AppData\\Local\\Programs\\Python\\Python37\\python.exe"
-}
+{    
+    "git.autofetch": true,
+    "git.enableSmartCommit": true,
+    "gitlens.advanced.messages": {
+        "suppressShowKeyBindingsNotice": true
+    },
+    "gitlens.historyExplorer.enabled": true,
+    "files.exclude": {
+        "**/.git": false
+    },
+
+    "python.linting.enabled": true,
+    "python.pythonPath": "C:\\Users\\User\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
+    "python.unitTest.pyTestEnabled": true,
+    "python.unitTest.pyTestArgs": [
+        ".\\resources"
+    ],
+    "python.unitTest.unittestEnabled": false,
+    "python.unitTest.nosetestsEnabled": false,
+  }
