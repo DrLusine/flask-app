@@ -1,6 +1,6 @@
 from flask import jsonify
 from app import app
-from cost_prediction_failed import CostPredictionFailed
+from services.error_handling.exceptions.cost_prediction_failed import CostPredictionFailed
 
 @app.errorhandler(CostPredictionFailed)
 def handle_cost_prediction_failed(error):
