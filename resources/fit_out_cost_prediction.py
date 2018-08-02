@@ -3,15 +3,21 @@ from flask import jsonify, Blueprint, request
 
 from flask_restful import Resource, Api
 from services.cost_prediction_model.cost_prediction_model import CostPredictionModel
-'''from measurement.measures import Volume'''
+from measurement.measures import Volume
 
 from services.error_handling.exceptions.cost_prediction_failed import CostPredictionFailed
+
 
 class FitOutCostPrediction(Resource):
     def post(self):
         try:
             costPredictionParameters = request.get_json()
-            buildingVolume = costPredictionParameters['buildingVolume']
+
+            buildingVolumeValue = costPredictionParameters['buildingVolume']['buildingVolumeValue']
+            if costPredictionParameters['buildingVolume']['buildingVolumeUnit'] == 'cubic foot':
+                buildingVolumeValue = self.cubicFeetToCubicMetres(
+                    buildingVolumeValue)
+
             isCatAIncluded = 0
             isCatBIncluded = 0
             isCatAAndBIncluded = 0
@@ -24,14 +30,15 @@ class FitOutCostPrediction(Resource):
                 isCatBIncluded = 1
 
             costPredictionParametersForModel = [
-                buildingVolume, isCatAIncluded, isCatBIncluded, isCatAAndBIncluded]
+                buildingVolumeValue, isCatAIncluded, isCatBIncluded, isCatAAndBIncluded]
 
-            costPredictionModel = CostPredictionModel()            
-            cost = costPredictionModel.predictCost(costPredictionParametersForModel)
+            costPredictionModel = CostPredictionModel()
+            cost = costPredictionModel.predictCost(
+                costPredictionParametersForModel)
 
         except ValueError as error:
             raise CostPredictionFailed(error.args[0], response_status_code=500)
-        
+
         except TypeError as error:
             raise CostPredictionFailed(error.args[0], response_status_code=500)
 
@@ -40,6 +47,9 @@ class FitOutCostPrediction(Resource):
 
         # return a json value
         return jsonify({'cost': cost})
+
+    def cubicFeetToCubicMetres(self, valueInCubicFeet):
+        return Volume(cubic_foot=valueInCubicFeet).cubic_meter
 
 
 fitout_cost_prediction_api = Blueprint(
