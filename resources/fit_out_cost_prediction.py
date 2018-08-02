@@ -2,12 +2,10 @@
 from flask import jsonify, Blueprint, request
 
 from flask_restful import Resource, Api
-from sklearn.externals import joblib
-from services.cost_prediction_failed import CostPredictionFailed
+from services.cost_prediction_model.cost_prediction_model import CostPredictionModel
+'''from measurement.measures import Volume'''
 
-costPredictionModel = joblib.load(
-    "./deep_learning_models/LR_33%split_model_inc_CatAB.pkl")
-
+from services.error_handling.exceptions.cost_prediction_failed import CostPredictionFailed
 
 class FitOutCostPrediction(Resource):
     def post(self):
@@ -28,8 +26,8 @@ class FitOutCostPrediction(Resource):
             costPredictionParametersForModel = [
                 buildingVolume, isCatAIncluded, isCatBIncluded, isCatAAndBIncluded]
 
-            cost = costPredictionModel.predict(
-                [costPredictionParametersForModel])[0]
+            costPredictionModel = CostPredictionModel()            
+            cost = costPredictionModel.predictCost(costPredictionParametersForModel)
 
         except ValueError as error:
             raise CostPredictionFailed(error.args[0], response_status_code=500)
