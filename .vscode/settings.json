@@ -9,6 +9,10 @@
         "**/.git": false
     },
 
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+
     "python.linting.enabled": true,
     "python.unitTest.pyTestEnabled": true,
     "python.unitTest.pyTestArgs": [
@@ -16,4 +20,5 @@
     ],
     "python.unitTest.unittestEnabled": false,
     "python.unitTest.nosetestsEnabled": false,
+    "python.pythonPath": "C:\\Users\\User\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
   }
