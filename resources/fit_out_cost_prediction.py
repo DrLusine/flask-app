@@ -3,7 +3,8 @@ from flask import jsonify, Blueprint, request
 
 from flask_restful import Resource, Api
 from services.cost_prediction_model.cost_prediction_model import CostPredictionModel
-from measurement.measures import Volume
+from services.building_vol_calculator.building_vol_metres_calculator import BuildingVolMetresCalculator
+from measurement.utils import guess
 
 from services.error_handling.exceptions.cost_prediction_failed import CostPredictionFailed
 
@@ -13,10 +14,8 @@ class FitOutCostPrediction(Resource):
         try:
             costPredictionParameters = request.get_json()
 
-            buildingVolumeValue = costPredictionParameters['buildingVolume']['buildingVolumeValue']
-            if costPredictionParameters['buildingVolume']['buildingVolumeUnit'] == 'cubic foot':
-                buildingVolumeValue = self.cubicFeetToCubicMetres(
-                    buildingVolumeValue)
+            buildingVolumeCalculator = BuildingVolMetresCalculator(costPredictionParameters['floorArea'], costPredictionParameters['averageFloorHeight'])
+            buildingVolumeValue = buildingVolumeCalculator.calculateVolume()
 
             isCatAIncluded = 0
             isCatBIncluded = 0
@@ -47,9 +46,6 @@ class FitOutCostPrediction(Resource):
 
         # return a json value
         return jsonify({'cost': cost})
-
-    def cubicFeetToCubicMetres(self, valueInCubicFeet):
-        return Volume(cubic_foot=valueInCubicFeet).cubic_meter
 
 
 fitout_cost_prediction_api = Blueprint(
