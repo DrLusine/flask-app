@@ -14,7 +14,7 @@ class FitOutCostPrediction(Resource):
         try:
             costPredictionParameters = request.get_json()
 
-            buildingVolumeCalculator = BuildingVolMetresCalculator(costPredictionParameters['buildingArea'], costPredictionParameters['buildingAverageFloorHeight'])
+            buildingVolumeCalculator = BuildingVolMetresCalculator(costPredictionParameters['floorArea'], costPredictionParameters['averageFloorHeight'])
             buildingVolumeValue = buildingVolumeCalculator.calculateVolume()
 
             isCatAIncluded = 0

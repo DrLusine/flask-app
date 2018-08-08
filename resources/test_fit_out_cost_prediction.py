@@ -7,11 +7,11 @@ import pytest
 @pytest.fixture
 def prediction_test_params():
     predictionTestParams = {
-        'buildingArea': {
+        'floorArea': {
             'areaValue': 10000,
             'areaUnit': 'sq_ft'
         },
-        'buildingAverageFloorHeight': {
+        'averageFloorHeight': {
             'heightValue': 3,
             'heightUnit': 'm'
         },
@@ -33,8 +33,8 @@ def test_fit_out_cost_prediction_with_areainsqft_heightinmetres(test_client_fact
 def test_fit_out_cost_prediction_with_areainsqmetres_heightinfeet(test_client_factory, prediction_test_params):
     client = test_client_factory(fitout_cost_prediction_api)
 
-    prediction_test_params['buildingAverageFloorHeight']['heightUnit'] = 'ft'
-    prediction_test_params['buildingAverageFloorHeight']['areaUnit'] = 'sq_m'
+    prediction_test_params['averageFloorHeight']['heightUnit'] = 'ft'
+    prediction_test_params['averageFloorHeight']['areaUnit'] = 'sq_m'
     
     response = client.post('/fitOutCostPrediction', json=prediction_test_params)
 
